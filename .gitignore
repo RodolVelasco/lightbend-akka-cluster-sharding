@@ -2,3 +2,4 @@
 lightbend.sbt
 target/
 .sbtopts
+project/
