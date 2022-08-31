@@ -3,6 +3,7 @@ package com.reactivebbq.orders
 import java.util.UUID
 
 import akka.actor.{Actor, ActorLogging, Props, Stash, Status}
+import akka.cluster.sharding.ShardRegion
 import akka.cluster.sharding.ShardRegion.{ExtractEntityId, ExtractShardId}
 import akka.pattern.pipe
 
@@ -30,6 +31,7 @@ object OrderActor {
 
   val shardIdExtractor: ExtractShardId = {
     case Envelope(id, _) => Math.abs(id.value.toString.hashCode % 30).toString
+    case ShardRegion.StartEntity(entityId) => Math.abs(entityId.hashCode % 30).toString
   }
 
   def props(repository: OrderRepository): Props = {
