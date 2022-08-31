@@ -3,3 +3,5 @@ lightbend.sbt
 target/
 .sbtopts
 project/
+data/
+akka-diagnostics/
